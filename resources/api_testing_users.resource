@@ -2,8 +2,6 @@
 Library    RequestsLibrary   
 Library    String
 
-*** Variables ***
-
 *** Keywords ***
 Create a new user
     ${RANDOM_WORD}    Generate Random String    length=4    chars=[LETTERS]
