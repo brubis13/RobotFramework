@@ -2,6 +2,7 @@
 Library    RequestsLibrary   
 Library    String
 
+*** Variables ***
 
 *** Keywords ***
 Create a new user
