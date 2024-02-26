@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.11.3 on darwin)" generated="2024-02-26T13:00:08.161210" rpa="false" schemaversion="5">
+<suite id="s1" name="Api Testing Users" source="/Users/brunaneves/Downloads/Cursos/robotframework/Apitesting/tests/api_testing_users.robot">
+<test id="s1-t1" name="Scenario 01: Registering a New User Successfully in ServeRest" line="9">
+<kw name="Create a new user" owner="api_testing_users">
+<kw name="Generate Random String" owner="String">
+<msg time="2024-02-26T13:00:08.328907" level="INFO">${RANDOM_WORD} = RDvZ</msg>
+<var>${RANDOM_WORD}</var>
+<arg>length=4</arg>
+<arg>chars=[LETTERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<status status="PASS" start="2024-02-26T13:00:08.328633" elapsed="0.000304"/>
+</kw>
+<kw name="Convert To Lower Case" owner="String">
+<msg time="2024-02-26T13:00:08.329232" level="INFO">${RANDOM_WORD} = rdvz</msg>
+<var>${RANDOM_WORD}</var>
+<arg>${RANDOM_WORD}</arg>
+<doc>Converts string to lower case.</doc>
+<status status="PASS" start="2024-02-26T13:00:08.329073" elapsed="0.000187"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2024-02-26T13:00:08.330078" level="INFO">${EMAIL} = rdvz@emailtest.com</msg>
+<arg>${EMAIL}</arg>
+<arg>${RANDOM_WORD}@emailtest.com</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2024-02-26T13:00:08.329371" elapsed="0.000750"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-02-26T13:00:08.330352" level="INFO">rdvz@emailtest.com</msg>
+<arg>${EMAIL}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-02-26T13:00:08.330226" elapsed="0.000165"/>
+</kw>
+<status status="PASS" start="2024-02-26T13:00:08.328072" elapsed="0.002376"/>
+</kw>
+<status status="PASS" start="2024-02-26T13:00:08.327558" elapsed="0.003013"/>
+</test>
+<status status="PASS" start="2024-02-26T13:00:08.163911" elapsed="0.166991"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Api Testing Users">Api Testing Users</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
