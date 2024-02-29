@@ -1,6 +1,7 @@
 *** Settings ***
 Library    RequestsLibrary   
 Library    String
+Library    Collections
 
 *** Keywords ***
 Create a new user
@@ -24,6 +25,7 @@ Registering a user using the ServeRest API
     ...    url=/usuarios
     ...    json=${BODY}
     Log    ${RESP.json()}
+    Set Test Variable    ${RESPONSE}    ${RESP.json()}
     
 Create Session in ServeRest
     ${HEADERS}    Create Dictionary
@@ -31,6 +33,7 @@ Create Session in ServeRest
     ...    Content-Type=application/json
     Create Session    alias=ServeRest    url=https://serverest.dev    headers=${HEADERS}
 
-
-    
-
+Check if the user was registered correctly
+    Log    ${RESPONSE}
+    Dictionary Should Contain Item    ${RESPONSE}    message    Cadastro realizado com sucesso
+    Dictionary Should Contain Key    ${RESPONSE}    _id
