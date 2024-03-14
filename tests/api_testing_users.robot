@@ -16,3 +16,9 @@ Scenario 02: Registering an existing user
     Registering a user using the ServeRest API      email=${EMAIL_TEST}    status_code=201
     Repeat user registrantion
     Check if the API did not register a repeat user
+
+Scenario 03:
+    Create a new user
+    Registering a user using the ServeRest API      email=${EMAIL_TEST}    status_code=201
+    Query data for a new user
+    Verify returned data

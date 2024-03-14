@@ -27,6 +27,9 @@ Registering a user using the ServeRest API
     ...    json=${BODY}
     ...    expected_status=${status_code}
     Log    ${RESP.json()}
+    IF    ${RESP.status_code} == 201
+            Set Test Variable    ${ID_USER}    ${RESP.json()["_id"]}
+    END
     Set Test Variable    ${RESPONSE}    ${RESP.json()}
     
 Create Session in ServeRest
@@ -45,3 +48,16 @@ Repeat user registrantion
 
 Check if the API did not register a repeat user
     Dictionary Should Contain Item    ${RESPONSE}    message    Este email já está sendo usado
+
+Query data for a new user
+    ${response_query}    GET On Session    alias=ServeRest    url=/usuarios/${ID_USER}
+    Set Test Variable    ${resp_query}    ${response_query.json()}
+
+Verify returned data
+    Log   ${resp_query}
+    Dictionary Should Contain Item    ${resp_query}    nome            Bruna Neves
+    Dictionary Should Contain Item    ${resp_query}    email           ${EMAIL_TEST}
+    Dictionary Should Contain Item    ${resp_query}    password        1234
+    Dictionary Should Contain Item    ${resp_query}    administrador   true
+    Dictionary Should Contain Item    ${resp_query}    _id             ${ID_USER}
+    
