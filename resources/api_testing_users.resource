@@ -30,7 +30,7 @@ Registering a user using the ServeRest API
     IF    ${RESP.status_code} == 201
             Set Test Variable    ${ID_USER}    ${RESP.json()["_id"]}
     END
-    Set Test Variable    ${RESPONSE}    ${RESP.json()}
+    Set Test Variable    ${RESPONSE_USERS}    ${RESP.json()}
     
 Create Session in ServeRest
     ${HEADERS}    Create Dictionary
@@ -39,15 +39,15 @@ Create Session in ServeRest
     Create Session    alias=ServeRest    url=https://serverest.dev    headers=${HEADERS}
 
 Check if the user was registered correctly
-    Log    ${RESPONSE}
-    Dictionary Should Contain Item    ${RESPONSE}    message    Cadastro realizado com sucesso
-    Dictionary Should Contain Key    ${RESPONSE}    _id
+    Log    ${RESPONSE_USERS}
+    Dictionary Should Contain Item    ${RESPONSE_USERS}    message    Cadastro realizado com sucesso
+    Dictionary Should Contain Key    ${RESPONSE_USERS}    _id
 
 Repeat user registrantion
     Registering a user using the ServeRest API    email=${EMAIL_TEST}    status_code=400
 
 Check if the API did not register a repeat user
-    Dictionary Should Contain Item    ${RESPONSE}    message    Este email já está sendo usado
+    Dictionary Should Contain Item    ${RESPONSE_USERS}    message    Este email já está sendo usado
 
 Query data for a new user
     ${response_query}    GET On Session    alias=ServeRest    url=/usuarios/${ID_USER}
@@ -60,4 +60,17 @@ Verify returned data
     Dictionary Should Contain Item    ${resp_query}    password        1234
     Dictionary Should Contain Item    ${resp_query}    administrador   true
     Dictionary Should Contain Item    ${resp_query}    _id             ${ID_USER}
+    
+Logging in the system
+    [Arguments]    ${email}    ${password}
+    ${BODY}    Create Dictionary    
+    ...    email=${EMAIL_TEST}    
+    ...    password=1234    
+
+    ${RESP}    POST On Session    
+    ...    alias=ServeRest
+    ...    url=/login
+    ...    json=${BODY}
+    Log    ${RESP.json()}
+    
     

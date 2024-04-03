@@ -22,3 +22,8 @@ Scenario 03:
     Registering a user using the ServeRest API      email=${EMAIL_TEST}    status_code=201
     Query data for a new user
     Verify returned data
+
+Scenario 04: Logging in
+    Create a new user
+    Registering a user using the ServeRest API      email=${EMAIL_TEST}     status_code=201
+    Logging in the system    email=${EMAIL_TEST}    password=1234
